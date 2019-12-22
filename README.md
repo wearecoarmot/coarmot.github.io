@@ -6,7 +6,7 @@ Coarmot Technical Blog (used [jekyll](https://jekyllrb.com/))
 git clone https://github.com/wearecoarmot/wearecoarmot.github.io
 ~~~
 
-### excute
+### run
 ~~~shell
 bundle exec jekyll serve
 ~~~
