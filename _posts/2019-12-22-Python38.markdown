@@ -1,0 +1,90 @@
+---
+layout: post
+title:  "Python 3.8 기능을 알아보자!"
+date:   2019-12-22 22:31:00 +0900
+categories: python
+background: '/assets/coarmot.jpg'
+---
+
+`Python 3.8`이 배포된지 벌써 2달이 지났다. 조금 늦었지만 주요 Feature들을 정리해 보겠다!
+
+[Assignment expressions](https://www.python.org/dev/peps/pep-0572/)
+
+필자는 `할당식`으로 해석하였다.
+(이 표현식은 한국말로 `바다 코끼리` 라는 표현식으로도 사용할 수 있다!)
+
+`3.8 이전 버전`
+~~~python
+sample = [
+    {'name': 'kuckjwi'},
+    {'name': 'devkang'},
+    {'name': None},
+]
+
+for s in sample:
+    name = s.get('name')
+    if name:
+        print(f'{name}')
+~~~
+
+`3.8 버전`
+~~~python
+sample = [
+    {'name': 'kuckjwi'},
+    {'name': 'devkang'},
+    {'name': None},
+]
+
+for s in sample:
+    if name := s.get('name'):
+        print(f'{name}')
+~~~
+
+위와같이 `Python 3.8`버전 부터는 `할당식`을 통하여 코드를 좀 더 간결하게 표현 할 수 있다!
+ 
+---------------------------------------
+
+[Positional-only parameters](https://www.python.org/dev/peps/pep-0570/)
+
+`Python`을 하다보면 너무 자유로워서  아래와 같은 함수 호출도 허용이 된다.
+
+`3.8 버전 이전`
+~~~python
+def pow(x, y, z):
+    r = x**y
+    if z is not None:
+        r %= z
+    return r
+
+
+pow(y=10, x=5, z=2)
+~~~
+
+이러한 애매모한 함수 파라미터들을 `Positional-only parameters` 기능을 통하여 아래와 같이 변환 할 수 있다.
+
+`3.8 버전`
+~~~python
+def pow(x, y, z, /):
+    r = x**y
+    if z is not None:
+        r %= z
+    return r
+
+
+pow(5, 1, 2)
+~~~
+아주 편~안해진것 같다.
+
+---------------------------------------
+
+`F-string debugging support`
+
+Format string 으로 디버깅을 한다니 무슨소리지! 하고 직접 써보았다.
+~~~python
+x = 3
+print(f'{x+1}') # 4
+print(f'{x+1=}') # x+1=4
+~~~
+이 기능은 Format string에 계산될 식이 들어갈 때 사전에 디버그 해볼 수 있어서 굉장히 유용할 것 같다!
+
+감사합니다 :)
