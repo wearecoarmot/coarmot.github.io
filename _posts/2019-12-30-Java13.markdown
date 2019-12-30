@@ -1,0 +1,58 @@
+---
+layout: post
+title:  "Java VisualVM 사용법"
+date:   2019-12-30 23:59:00 +0900
+categories: java
+background: '/assets/coarmot.jpg'
+---
+
+`VisualVM`이란?
+
+JVM으로 구동되는 Application의 Thead 및 GC 사용량을 모니터링할 수 있는 JDK 도구이며, Oracle JDK에는 이미 기본적으로 내장되어있지만, OpenJDK에는 없는 것으로 알고 있다.
+이 포스트는 OpenJDK 기준으로 작성되었기에 `VisualVM`을 별도로 다운로드 받아서 사용해 보겠다!
+
+[Visual VM](https://visualvm.github.io/)
+
+위의 링크에서 각 OS에 맞는 파일을 설치한다.
+
+설치 한 후 실행하면 아래와 같은 화면이 나오면 설치에는 성공한 것이다.
+
+![1.pnd](/assets/2019-12-30-post/1.png){: width="100%" height="100%"}
+
+이 포스트에서는 간단하게 `Visual GC Plugin`을 통하여 Application의 GC를 확인하는 방법을 설명하겠다.
+
+먼저 `Visual GC Plugin`을 설치해보자!
+
+필자는 `Mac OS` 기준으로 설명하겠다. 먼저 `VisualVM` 상단에 보면 `Tools`라는 메뉴를 클릭한 후 `plugins`를 선택하자.
+
+![2.pnd](/assets/2019-12-30-post/2.png){: width="100%" height="100%"}
+
+위와같이 선택후 `install` 버튼을 누르자!
+
+자 이제 GC를 눈으로 보기 위한 모든 일련과정이 끝났다!
+
+이제 특정 자바 프로그램을 선택해서 GC를 눈으로 같이 확인해 볼 수 있다.
+
+![3.pnd](/assets/2019-12-30-post/3.png){: width="100%" height="100%"}
+
+위와같이 사이드바의 `Local`탭을 확인해 보면 현재 실행중인 자바프로세스들의 목록이 나온다.
+
+필자는 `Intellij`를 선택하겠다!
+
+원하는 자바 프로세스를 선택한 후 더블클릭 하면 아래와 같이 현재 GC의 수행과정을 손쉽게 눈으로 확인할 수 있다.
+
+![4.pnd](/assets/2019-12-30-post/4.png){: width="100%" height="100%"}
+
+여기서 가장 중점적으로 볼 것이 `Old` 영역이다. (이 영역이 꽉차면 `OOM(Out Of Memory)`이 일어난다)
+
+기본적으로 자바 GC의 수행 과정은 아래와 같다.
+`Eden -> S0, S1 -> Old`
+
+참고로 `S0, S1` 영역은 둘중 하나는 항상 비어있는 상태이다.
+(`S0`이 차있으면 `S1`이 비어있고 `S1`이 차있으면 `S0`이 비어있다고 생각하면 된다.)
+
+우리는 이제 `VisualVM`으로 위의 GC의 일련 과정을 눈으로 확인 할 수 있게 되었다!
+
+다음번에는 Minor GC, Major GC에 대해 설명해 보겠다!
+
+그럼 20000!
